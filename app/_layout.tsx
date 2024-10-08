@@ -4,7 +4,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -35,10 +35,15 @@ export default function RootLayout() {
         style={styles.background}
         resizeMode="cover"
       >
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <View style={styles.content}>
+          <Stack
+            screenOptions={{
+              contentStyle: { backgroundColor: 'transparent' },
+          }}>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </View>
       </ImageBackground>
     </ThemeProvider>
   );
@@ -49,5 +54,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+  },
+  content: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
 });
