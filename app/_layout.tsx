@@ -4,9 +4,9 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { Header } from '@/components/Header';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -15,6 +15,7 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Adamina: require('../assets/fonts/Adamina-Regular.ttf'),
   });
 
   useEffect(() => {
@@ -29,11 +30,33 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Header />
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <ImageBackground
+        source={require('../assets/images/background.png')}
+        style={styles.background}
+        resizeMode="cover"
+      >
+        <View style={styles.content}>
+          <Stack
+            screenOptions={{
+              contentStyle: { backgroundColor: 'transparent' },
+          }}>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </View>
+      </ImageBackground>
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+});

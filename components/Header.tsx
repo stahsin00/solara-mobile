@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         width: '100%',
-        height: 100,
+        height: 90,
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         flexDirection: 'row',
         alignItems: 'center',
+        zIndex: 3,
     },
     logo: {
       width: 40,
@@ -32,5 +33,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 24,
       fontWeight: 'normal',
+      fontFamily: 'Adamina',
+      color: 'white',
     }
 });
